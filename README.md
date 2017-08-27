@@ -1,11 +1,47 @@
 # Canary Bus
- 
-Runs an Express app to forward your [Thinkst Canarytoken][CTorg] notification webooks to [Slack], [Honeycomb], and — as time goes on — anything else that seems to make sense at the time. Optimised for rapid deployment so you can get back to scattering canaries everywhere.
 
+In [two minutes or less][2min], deploy an anonymous target for your [Thinkst Canarytokens][CTorg] that forwards to [Slack], [Honeycomb], or whatever else you have in mind.
+
+[2min]: #two-minute-deployment-on-glitch
 [CTorg]: https://canarytokens.org/generate
 [Slack]: https://slack.com/
 [Honeycomb]: https://honeycomb.io/
 [Glitch]: https://glitch.com
+
+## Two Minute Deployment on Glitch
+
+[Glitch] runs your JavaScript for free as long as you don't mind anyone on the Internet being able to read your source code. It's not the best for the OPSEC if you're a black hat, but you're a white hat hacker just trying to prove your gym saw your request to cancel your membership.
+
+* Start in the Glitch editor for [`canary-bus`][editme]
+
+* Click **Remix this** just above the **Canary Bus** title
+
+* Fill in `.env` with your [Environment Variables][envars]
+
+* Click **Show Live** to visit your site, e.g. `https://wut.glitch.me`
+
+* [Create a web hook Canarytoken][CTorg] aimed at `https://wut.glitch.me/SECRET`
+
+* Test it
+
+Notes:
+
+* [You don't need an account if you only need five days][restrictions] and can keep your browser cookies that long
+
+* Your `.env` needs `SECRET` and at least one target e.g. `SLACK_WEBHOOK_URL` to be useful
+
+* Your `.env` is the one file that Glitch *doesn't* let everybody read; do [let them know][fgsec] if you prove otherwise eh?
+
+[editme]: https://glitch.com/edit/#!/canary-bus?path=README.md:1:0
+[restrictions]: https://glitch.com/faq#restrictions
+[envars]: #environment-variables
+[fgsec]: http://www.fogcreek.com/security/
+
+## Customisation
+
+* To change the domain name on Glitch, click your project name in the upper left corner, then select and edit the name below it
+
+* Fill in `public/index.html` with something suitably obscure
 
 # Environment Variables
 
@@ -23,24 +59,3 @@ Example environment in `.env` file format:
 `SLACK_WEBHOOK_URL` is a Slack webhook URL. You know what to do.
 
 `HONEY_WRITE_KEY` is for [Honeycomb], my favourite telemetry destination ever. Unlike your usual time series databases, Honeycomb is utterly unfussed by high cardinality data. Like, say, your Canarytoken IDs, or the IP addresses of the machines setting them off.
-
-# Deployment Options
-
-In general:
-
-* Set up a few environment variables, _especially_ `SECRET`
-* Find a way to aim web requests at some JavaScript
-  (yeah, eww, get over it, it's for the portability)
-* [Create a web hook Canarytoken][CTorg] aimed at `https://wut.example.com/SECRET`
-* Test your Canarytoken
-
-More specifically...
-
-## Deployment on Glitch
-
-[Glitch] runs your JavaScript for free as long as you don't mind anyone on the Internet being able to read your source code. It's not the best for the privacy, but arguably adequate if you're just trying to prove your gym saw your request to cancel your membership.
-
-* Visit [`canary-bus.glitch.me`](https://canary-bus.glitch.me/)
-* "Remix this", registering an account on the fly
-* Fill in `.env` with your [Environment Variables](#environment-variables)
-* Fill in `public/index.html` with something suitably obscure
