@@ -1,5 +1,5 @@
 {
-  "name": "canary-bus",
+  "name": "@garthk/canary-bus",
   "version": "1.0.0",
   "description": "I forward reports from canaries to you",
   "main": "lib/index.js",
