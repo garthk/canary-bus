@@ -11,7 +11,7 @@ indent_size = 4
 [*.{py,js,jsx,ts,tsx,json}]
 indent_style = space
 
-[*.{json,html,css}]
+[*.{js,json,html,css}]
 indent_size = 2
 
 [Makefile]
