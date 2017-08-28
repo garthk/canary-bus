@@ -1,6 +1,6 @@
 {
   "name": "@garthk/canary-bus",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "I forward reports from canaries to you",
   "main": "lib/index.js",
   "author": "Garth Kidd <garth@garthk.com>",

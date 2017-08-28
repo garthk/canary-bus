@@ -24,11 +24,11 @@ In [two minutes or less][2min], deploy an anonymous target for your [Thinkst Can
 
 * Test it
 
-Notes:
+Note:
 
-* [You don't need an account if you only need five days][restrictions] and can keep your browser cookies that long
+* [You don't need an account if you only need five days][restrictions] and can keep your browser cookies that long.
 
-* Your `.env` needs `SECRET` and at least one target e.g. `SLACK_WEBHOOK_URL` to be useful
+* Your `.env` needs `SECRET` and at least one `NOTIFY_*` to be useful.
 
 * Your `.env` is the one file that Glitch *doesn't* let everybody read; do [let them know][fgsec] if you prove otherwise eh?
 
@@ -39,23 +39,25 @@ Notes:
 
 ## Customisation
 
-* To change the domain name on Glitch, click your project name in the upper left corner, then select and edit the name below it
+* To change the domain name on Glitch, click your project name in the upper left corner, then select and edit the name below it.
 
-* Fill in `public/index.html` with something suitably obscure
+* To change the site's appearance for a thin veneer of respectability, edit `public/index.html`.
 
 # Environment Variables
 
-Example environment in `.env` file format:
+* The shortest useful environment in `.env` file format is:
 
-    SECRET=SECRET
-    TMI=true
-    SLACK_WEBHOOK_URL=https://hooks.slack.com/services/4615/nope/f3c3eeb919a8
-    HONEY_WRITE_KEY=4615b42fnopenopenopef3c3eeb
+  ```
+  SECRET=SECRET
+  NOTIFY_SLACK=https://hooks.slack.com/services/4615/nope/f3c3eeb919a8
+  ```
 
-`SECRET` is mandatory, and gives the webhook path segment after `/` to which you'll send your Canarytoken alerts.
+* `SECRET` is mandatory, and gives the webhook path segment after `/` to which you'll send your Canarytoken alerts.
 
-`TMI` will, if `true`, expose this `README` file as the web server's index. That's great for trying this out on [Glitch], but otherwise perhaps a poor life choice. If `TMI` is absent, empty, or `false`, the web server's index will be whatever you put in `public/index.html`.
+  All other envars are optional.
 
-`SLACK_WEBHOOK_URL` is a Slack webhook URL. You know what to do.
+* `TMI` will, if `true`, expose this `README` file as the web server's index. By default, the web server's index will be whatever you put in `public/index.html`.
 
-`HONEY_WRITE_KEY` is for [Honeycomb], my favourite telemetry destination ever. Unlike your usual time series databases, Honeycomb is utterly unfussed by high cardinality data. Like, say, your Canarytoken IDs, or the IP addresses of the machines setting them off.
+* `NOTIFY_SLACK` takes a Slack webhook URL.
+
+* `NOTIFY_HONEYCOMB` takes a [Honeycomb] write key. Honeycomb is my favourite telemetry destination ever. Unlike your usual time series databases, Honeycomb is _utterly unfussed_ by high cardinality data, e.g. Canarytoken IDs, the IP addresses of the machines setting them off, user agents, whatevs.
