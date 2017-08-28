@@ -43,7 +43,25 @@ Note:
 
 * To change the site's appearance for a thin veneer of respectability, edit `public/index.html`.
 
-# Environment Variables
+## Re-use
+
+If you're sorted on catching web hooks, deployment, and a suitable masquerade, but want some quick and dirty notification code:
+
+* At a prompt:
+
+  `npm install --save @garthk/canary-bus`
+
+* In your code:
+
+  ```
+  const bus = require('@garthk/canary-bus').auto();
+  // get a payload from a canary token webhook
+  bus.notify(payload);
+  ```
+
+The `notify` method returns a `Promise` for `null`. It'll wait for Slack, but not Honeycomb.
+
+## Environment Variables
 
 * The shortest useful environment in `.env` file format is:
 
